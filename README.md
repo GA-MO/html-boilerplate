@@ -1,8 +1,10 @@
 
 # Front End Boilerplate
-Front-end boilerplate with everything you need to get started.
+Front-end boilerplate for creating new web projects with Gulp.js and everything you need to get started.
 
 # Getting Started
+Required! Gulp installed `npm install -g gulp`
+
 ```
 $ cd html-boilerplate
 $ npm install
