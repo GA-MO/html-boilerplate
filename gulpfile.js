@@ -40,7 +40,11 @@ const plumber      = require('gulp-plumber');
 gulp.task('browserSync', () => {
   if (proxy) {
     browserSync({
-      proxy: proxy
+      proxy: proxy,
+      options: {
+        reloadDelay: 250
+      },
+      notify: false
     });
   } else {
     browserSync({
@@ -113,7 +117,7 @@ gulp.task('styles', () => {
     .pipe(sass({
       errLogToConsole: true,
       includePaths: [
-          'app/styles/scss/'
+        'app/styles/scss'
       ]
     }))
     .pipe(autoprefixer({
@@ -209,10 +213,10 @@ gulp.task('createFolder', () => {
  * Startup the web server
  */
 
-gulp.task('default', ['browserSync', 'scripts', 'styles'], () => {
+gulp.task('default', ['browserSync', 'scripts', 'styles', 'images'], () => {
   gulp.watch('app/scripts/src/**', ['scripts']);
   gulp.watch('app/styles/scss/**', ['styles']);
-  gulp.watch('app/images/**', ['images']);
+  // gulp.watch('app/images/**', ['images']);
   gulp.watch('app/*.html', ['html']);
   gulp.watch('app/*.php', ['php']);
 });
