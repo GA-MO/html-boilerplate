@@ -1,6 +1,7 @@
 'use strict';
 
 const output = 'dist';
+const proxy = false; // Input your server path 'localhost/your-project/app'
 const scriptOutputName = 'main.js';
 const styleOutputName = 'styles.css';
 const masterSassFileName = 'styles.scss';
@@ -37,15 +38,21 @@ const plumber      = require('gulp-plumber');
  */
 
 gulp.task('browserSync', () => {
-  browserSync({
-    server: {
-      baseDir: "app/"
-    },
-    options: {
-      reloadDelay: 250
-    },
-    notify: false
-  });
+  if (proxy) {
+    browserSync({
+      proxy: proxy
+    });
+  } else {
+    browserSync({
+      server: {
+        baseDir: 'app/'
+      },
+      options: {
+        reloadDelay: 250
+      },
+      notify: false
+    });
+  }
 });
 
 /**
@@ -148,6 +155,13 @@ gulp.task('html', () => {
     .on('error', gutil.log); // catch errors
 });
 
+gulp.task('php', () => {
+  gulp.src('app/*.php')
+    .pipe(plumber())
+    .pipe(browserSync.reload({stream: true}))
+    .on('error', gutil.log); // catch errors
+});
+
 gulp.task('html-build', () => {
   gulp.src('app/*')
     .pipe(plumber())
@@ -200,6 +214,7 @@ gulp.task('default', ['browserSync', 'scripts', 'styles'], () => {
   gulp.watch('app/styles/scss/**', ['styles']);
   gulp.watch('app/images/**', ['images']);
   gulp.watch('app/*.html', ['html']);
+  gulp.watch('app/*.php', ['php']);
 });
 
 /**

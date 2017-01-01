@@ -1,0 +1,539 @@
+<!doctype html>
+<!--[if lt IE 8]><html lang="en" class="ie7"><![endif]-->
+<!--[if IE 8]><html lang="en" class="ie8"><![endif]-->
+<!--[if IE 9]><html lang="en" class="ie9"><![endif]-->
+<!--[if gt IE 9]><html lang="en"><![endif]-->
+<!--[if !IE]><html lang="en"><![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Website Title</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="stylesheet" href="styles/styles.css">
+  </head>
+  <body>
+    <h1>Welcome to HTML Boilerplate</h1>
+    <div class="body-style-guide">
+      <div class="container">
+        <div class="section-style">
+          <h1>Font style</h1>
+          <div class="font-title-big">Lorem Ipsum is simply dummy text of the printing</div>
+          <div class="font-title">Lorem Ipsum is simply dummy text of the printing</div>
+          <div class="font-desc-big">Lorem Ipsum is simply dummy text of the printing</div>
+          <div class="font-desc">Lorem Ipsum is simply dummy text of the printing</div>
+          <div class="font-desc-small">Lorem Ipsum is simply dummy text of the printing</div>
+          <br />
+          <pre>
+            <div class="font-title-big"></div>
+            <div class="font-title"></div>
+            <div class="font-desc-big"></div>
+            <div class="font-desc"></div>
+            <div class="font-desc-small"></div>
+          </pre>
+        </div>
+        <br />
+        <div class="section-style">
+          <h1>Text Label</h1>
+          <p>Add Class <code>.black</code>, <code>.gray</code>, <code>.red</code>, <code>.green</code> or <code>.blue</code> for button color.</p>
+          <span class="text-label black">Label</span>
+          <span class="text-label">Label</span>
+          <span class="text-label red">Label</span>
+          <span class="text-label green">Label</span>
+          <span class="text-label blue">Label</span>
+          <br />
+          <br />
+          <p>Lorem ipsum dolor sit amet, <span class="text-label red">consectetur</span> adipisicing elit. Sunt iusto assumenda voluptatibus perferendis obcaecati blanditiis recusandae doloremque dolorem excepturi, dolorum officia repellendus dolor eum fugit nulla. Ea alias quaerat, minus!</p>
+          <br />
+          <pre>
+            <span class="text-label">Label</span>
+          </pre>
+        </div>
+        <br />
+        <div class="section-style">
+          <h1>Box Message</h1>
+          <p>Add Class <code>.loading</code>, <code>.warning</code>, <code>.error</code>, and <code>.success</code> for box color.</p>
+          <div class="box-message-info">
+            Helow welcom to my site.
+          </div>
+          <div class="box-message-info loading">
+            Helow welcom to my site.
+          </div>
+          <div class="box-message-info warning">
+            Helow welcom to my site.
+          </div>
+          <div class="box-message-info error">
+            Helow welcom to my site.
+          </div>
+          <div class="box-message-info success">
+            Helow welcom to my site.
+          </div>
+          <br />
+          <pre>
+            <span class="text-label">Label</span>
+          </pre>
+        </div>
+        <br />
+        <div class="section-style">
+          <h1>Button</h1>
+          <br />
+          <h4>Button default</h4>
+          <p>Add Class <code>.black</code>, <code>.gray</code>, <code>.red</code>, <code>.green</code> or <code>.blue</code> for button color.</p>
+          <button class="button">Button</button>
+          <a href="" class="button black">Button</a>
+          <a href="" class="button gray">Button</a>
+          <a href="" class="button red">Button</a>
+          <a href="" class="button green">Button</a>
+          <a href="" class="button blue">Button</a>
+          <br />
+          <br />
+          <pre>
+            <button class="button">Button</button>
+          </pre>
+          <br />
+          <h4>Button with border</h4>
+          <button class="button-outline">Button</button>
+          <a href="" class="button-outline black">Button</a>
+          <a href="" class="button-outline gray">Button</a>
+          <a href="" class="button-outline red">Button</a>
+          <a href="" class="button-outline green">Button</a>
+          <a href="" class="button-outline blue">Button</a>
+          <br />
+          <br />
+          <pre>
+            <button class="button-outline">Button</button>
+          </pre>
+          <br />
+          <h4>Size</h4>
+          <p>Add Class <code>.large</code>, <code>.small</code> or <code>.xsmall</code> for additional sizes.</p>
+          <p><button class="button red large">Large</button></p>
+          <p><button class="button red">Default</button></p>
+          <p><button class="button red small">Small</button></p>
+          <p><button class="button red xsmall">Extra Small</button></p>
+          <br />
+          <br />
+          <h4>Disabled state</h4>
+          <p>Add the <code>disabled</code> attribute and class <code>.disabled</code> to buttons.</p>
+          <button class="button red disabled" disabled>Button</button>
+          <button class="button-outline red disabled" disabled>Button</button>
+          <br />
+          <br />
+          <br />
+          <h4>Button inline</h4>
+          <div class="button-inline">
+            <button class="button red"> Button </button>
+            <a href="" class="button green"> Button </a>
+            <a href="" class="button blue"> Button </a>
+            <a href="" class="button gray"> Button </a>
+          </div>
+          <br />
+          <pre>
+            <div class="button-inline">
+              <a href="" class="button green"> Next </a>
+              <a href="" class="button blue"> OK </a>
+              <a href="" class="button gray"> Cancel </a>
+            </div>
+          </pre>
+          <br />
+          <h4>Button with icon</h4>
+          <p>Get more icons <a href="http://fontawesome.io/icons/" class="link" target="_blank">Font Awesome icon</a></p>
+          <button class="button red"><i class="fa fa-trash" aria-hidden="true"></i> Close </button>
+          <br />
+          <br />
+          <pre>
+            <button class="button red"><i class="fa fa-trash"></i> Close</button>
+          </pre>
+          <br />
+          <h4>Button inline group</h4>
+          <div class="button-group">
+            <a href="" class="button red active"> Button </a>
+            <a href="" class="button red"> Button </a>
+            <a href="" class="button red"> Button </a>
+          </div>
+          <br />
+          <div class="button-group">
+            <a href="" class="button-outline red active"> Button </a>
+            <a href="" class="button-outline red"> Button </a>
+            <a href="" class="button-outline red"> Button </a>
+          </div>
+          <br />
+          <pre>
+            <div class="button-group">
+              <a href="" class="button"> Button </a>
+              <a href="" class="button"> Button </a>
+              <a href="" class="button"> Button </a>
+            </div>
+          </pre>
+          <br />
+          <br />
+          <h4>Button inline group Vertical</h4>
+          <div class="button-group vertical">
+            <a href="" class="button-outline red active"> Button </a>
+            <a href="" class="button-outline red"> Button </a>
+            <a href="" class="button-outline red"> Button </a>
+          </div>
+          <br />
+          <pre>
+            <div class="button-group vertical">
+              <a href="" class="button"> Button </a>
+              <a href="" class="button"> Button </a>
+              <a href="" class="button"> Button </a>
+            </div>
+          </pre>
+          <br />
+        </div>
+        <div class="section-style">
+          <h1>Form style</h1>
+          <div class="row">
+            <div class="D-4">
+              <div class="box-form-input">
+                <label class="form-label">Text</label>
+                <div class="wrap-form-input">
+                  <input class="form-input" placeholder="input text" />
+                </div>
+              </div>
+            </div>
+            <div class="D-4">
+              <div class="box-form-input">
+                <label class="form-label">Select</label>
+                <div class="wrap-form-input">
+                  <select class="form-input">
+                    <option value="" >option 1</option>
+                    <option value="" >option 2</option>
+                    <option value="" >option 3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="D-4">
+              <div class="box-form-input">
+                <label class="form-label">Label</label>
+                <div class="wrap-form-input">
+                  <input class="form-input" placeholder="input disabled" disabled />
+                </div>
+              </div>
+            </div>
+          </div>
+          <pre>
+            <div class="box-form-input">
+              <label class="form-label">Label</label>
+              <div class="wrap-form-input">
+                <input class="form-input" placeholder="input text.." />
+              </div>
+            </div>
+          </pre>
+          <br />
+          <b>Form validation</b>
+          <p>Add Class <code>.loading</code>, <code>.warning</code>, <code>.error</code> or <code>.success</code> for input status.</p>
+          <br />
+          <div class="row">
+            <div class="D-3">
+              <div class="box-form-input">
+                <label class="form-label">Text</label>
+                <div class="wrap-form-input loading">
+                  <input class="form-input" placeholder="input text" />
+                </div>
+              </div>
+            </div>
+            <div class="D-3">
+              <div class="box-form-input">
+                <label class="form-label">Text</label>
+                <div class="wrap-form-input error">
+                  <input class="form-input" placeholder="input text" />
+                  <div class="validation-label">Validation message field</div>
+                </div>
+              </div>
+            </div>
+            <div class="D-3">
+              <div class="box-form-input">
+                <label class="form-label">Text</label>
+                <div class="wrap-form-input warning">
+                  <input class="form-input" placeholder="input text" />
+                  <div class="validation-label">Validation message field</div>
+                </div>
+              </div>
+            </div>
+            <div class="D-3">
+              <div class="box-form-input">
+                <label class="form-label">Text</label>
+                <div class="wrap-form-input success show-icon">
+                  <input class="form-input" placeholder="input text" />
+                  <div class="validation-label">Validation message field</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pre>
+            // Class name = loading, error, warning, success
+
+            <div class="box-form-input">
+              <label class="form-label">Text</label>
+              <div class="wrap-form-input error">
+                <input class="form-input" placeholder="input text" />
+                <div class="validation-label">Validation message field</div>
+              </div>
+            </div>
+          </pre>
+          <br />
+          <b>Form inline</b>
+          <br />
+          <br />
+          <div class="box-form-input inline">
+            <label class="form-label">Text</label>
+            <div class="wrap-form-input">
+              <input class="form-input" placeholder="input text" />
+            </div>
+            <label class="form-label">Text</label>
+            <div class="wrap-form-input">
+              <input class="form-input" placeholder="input text" />
+            </div>
+          </div>
+          <pre>
+            <div class="box-form-input inline">
+              <label class="form-label">Text</label>
+              <div class="wrap-form-input">
+                <input class="form-input" placeholder="input text" />
+              </div>
+              <label class="form-label">Text</label>
+              <div class="wrap-form-input">
+                <input class="form-input" placeholder="input text" />
+              </div>
+            </div>
+          </pre>
+          <br />
+          <b>Form input group</b>
+          <br />
+          <br />
+          <div class="box-form-input-group">
+            <div class="box-form-input">
+              <label class="form-label">Text</label>
+              <div class="wrap-form-input">
+                <input class="form-input" placeholder="input text" />
+              </div>
+            </div>
+            <div class="box-form-input">
+              <label class="form-label">Text</label>
+              <div class="wrap-form-input">
+                <input class="form-input" placeholder="input text" />
+              </div>
+            </div>
+            <div class="box-form-input">
+              <label class="form-label">Text</label>
+              <div class="wrap-form-input">
+                <input class="form-input" placeholder="input text" />
+              </div>
+            </div>
+          </div>
+          <div class="box-form-input-group">
+            <div class="box-form-input">
+              <div class="wrap-form-input">
+                <input class="form-input" placeholder="input text" />
+              </div>
+            </div>
+            <div class="box-form-input">
+              <div class="wrap-form-input">
+                <input class="form-input" placeholder="input text" />
+              </div>
+            </div>
+            <div class="box-form-input">
+              <div class="wrap-form-input">
+                <input class="form-input" placeholder="input text" />
+              </div>
+            </div>
+          </div>
+          <pre>
+            <div class="box-form-input-group">
+              <div class="box-form-input">
+                <label class="form-label">Text</label>
+                <div class="wrap-form-input">
+                  <input class="form-input" placeholder="input text" />
+                </div>
+              </div>
+              <div class="box-form-input">
+                <label class="form-label">Text</label>
+                <div class="wrap-form-input">
+                  <input class="form-input" placeholder="input text" />
+                </div>
+              </div>
+              <div class="box-form-input">
+                <label class="form-label">Text</label>
+                <div class="wrap-form-input">
+                  <input class="form-input" placeholder="input text" />
+                </div>
+              </div>
+            </div>
+          </pre>
+          <b>Input with button</b>
+          <br />
+          <br />
+          <div class="row">
+            <div class="D-4">
+              <div class="box-input-with-button">
+                <div class="wrap-form-input">
+                  <input type="text" class="form-input" placeholder="Input text..." />
+                </div>
+                <span class="input-group-button">
+                  <button class="button red small" type="button">Button</button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <pre>
+            <div class="box-input-with-button">
+              <div class="wrap-form-input">
+                <input type="text" class="form-input" placeholder="Input text..." />
+              </div>
+              <span class="input-group-button">
+                <button class="button red small" type="button">Button</button>
+              </span>
+            </div>
+          </pre>
+          <br />
+          <b>Input radio</b>
+          <br />
+          <br />
+          <div class="input-radio">
+            <label>
+              <input type="radio" name="radio" />
+              <span class="input"></span>
+            </label>
+          </div>
+          <br />
+          <br />
+          <div class="form-input-radio">
+            <label>
+              <input type="radio" name="optradio" checked />Input radio
+              <span class="input"></span>
+            </label>
+            <label>
+              <input type="radio" name="optradio" />Input radio
+              <span class="input"></span>
+            </label>
+          </div>
+          <div class="form-input-radio inline">
+            <label>
+              <input type="radio" name="optradio" checked />Input radio inline
+              <span class="input"></span>
+            </label>
+            <label>
+              <input type="radio" name="optradio" />Input radio inline
+              <span class="input"></span>
+            </label>
+          </div>
+          <pre>
+            <div class="input-radio">
+              <label>
+                <input type="radio" name="radio" />
+                <span class="input"></span>
+              </label>
+            </div>
+
+            // Form
+
+            <div class="form-input-radio">
+              <label>
+                <input type="radio" name="radio" checked />Input radio
+                <span class="input"></span>
+              </label>
+              <label>
+                <input type="radio" name="radio" />Input radio
+                <span class="input"></span>
+              </label>
+            </div>
+
+            // Inline
+
+            <div class="form-input-radio inline">
+              <label>
+                <input type="radio" name="radio" checked />Input radio inline
+                <span class="input"></span>
+              </label>
+              <label>
+                <input type="radio" name="optradio" />Input radio inline
+                <span class="input"></span>
+              </label>
+            </div>
+          </pre>
+          <br />
+          <!-- ========================== -->
+          <!-- CHECKBOX INPUT -->
+          <!-- ========================== -->
+          <b>Input checkbox</b>
+          <br />
+          <br />
+          <div class="input-checkbox">
+            <label>
+              <input type="checkbox" name="checkbox" />
+              <span class="input"></span>
+            </label>
+          </div>
+          <br />
+          <div class="form-input-checkbox">
+            <label>
+              <input type="checkbox" name="checkbox" />Input checkbox
+              <span class="input"></span>
+            </label>
+            <label>
+              <input type="checkbox" name="checkbox" />Input checkbox
+              <span class="input"></span>
+            </label>
+          </div>
+          <div class="form-input-checkbox inline">
+            <label>
+              <input type="checkbox" name="checkbox" />Input checkbox inline
+              <span class="input"></span>
+            </label>
+            <label>
+              <input type="checkbox" name="checkbox" />Input checkbox inline
+              <span class="input"></span>
+            </label>
+          </div>
+          <pre>
+            <div class="input-checkbox">
+              <label>
+                <input type="checkbox" name="checkbox" />
+                <span class="input"></span>
+              </label>
+            </div>
+
+            // Form
+
+            <div class="form-input-checkbox">
+              <label>
+                <input type="checkbox" name="checkbox" />Input checkbox
+                <span class="input"></span>
+              </label>
+              <label>
+                <input type="checkbox" name="checkbox" />Input checkbox
+                <span class="input"></span>
+              </label>
+            </div>
+
+            // Inline
+
+            <div class="form-input-radio inline">
+              <label>
+                <input type="checkbox" name="checkbox" />Input checkbox inline
+                <span class="input"></span>
+              </label>
+              <label>
+                <input type="radio" name="optradio" />Input radio inline
+                <span class="input"></span>
+              </label>
+            </div>
+          </pre>
+        </div>
+        <br />
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  	<script>
+  		$('pre').each(function(){
+  			var currentHTML = $(this).html().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  			$(this).html(currentHTML)
+  		})
+  	</script>
+  </body>
+</html>
