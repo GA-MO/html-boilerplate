@@ -20,6 +20,7 @@ const autoPrefixBrowserList = [
  */
 
 const gulp         = require('gulp');
+const babel        = require('gulp-babel');
 const gutil        = require('gulp-util');
 const concat       = require('gulp-concat');
 const uglify       = require('gulp-uglify');
@@ -87,6 +88,9 @@ gulp.task('images-build', () => {
 gulp.task('scripts', () => {
   gulp.src(['app/scripts/src/**/*.js'])
     .pipe(plumber())
+    .pipe(babel({
+        presets: ['es2015']
+    }))
     .pipe(concat(scriptOutputName))
     .on('error', gutil.log) // catch errors
     .pipe(gulp.dest('app/scripts'))
@@ -96,6 +100,9 @@ gulp.task('scripts', () => {
 gulp.task('scripts-build', () => {
   gulp.src(['app/scripts/src/**/*.js'])
     .pipe(plumber())
+    .pipe(babel({
+        presets: ['es2015']
+    }))
     .pipe(concat(scriptOutputName))
     .pipe(uglify()) // compress
     .pipe(gulp.dest(''+output+'/scripts'));
