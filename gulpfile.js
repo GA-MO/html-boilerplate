@@ -33,6 +33,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const gulpSequence = require('gulp-sequence');
 const shell        = require('gulp-shell');
 const plumber      = require('gulp-plumber');
+const sourcemaps   = require('gulp-sourcemaps');
 
 /**
  * Task Browser Sync for reload browser
@@ -85,17 +86,19 @@ gulp.task('images-build', () => {
  * Compiling scripts
  */
 
-gulp.task('scripts', () => {
-  gulp.src(['app/scripts/src/**/*.js'])
-    .pipe(plumber())
-    .pipe(babel({
-        presets: ['es2015']
-    }))
-    .pipe(concat(scriptOutputName))
-    .on('error', gutil.log) // catch errors
-    .pipe(gulp.dest('app/scripts'))
-    .pipe(browserSync.reload({stream: true}));
-});
+ gulp.task('scripts', () => {
+   gulp.src(['app/scripts/src/**/*.js'])
+     .pipe(sourcemaps.init())
+     .pipe(plumber())
+     .pipe(babel({
+         presets: ['es2015']
+     }))
+     .pipe(concat(scriptOutputName))
+     .on('error', gutil.log) // catch errors
+     .pipe(sourcemaps.write())
+     .pipe(gulp.dest('app/scripts'))
+     .pipe(browserSync.reload({stream: true}));
+ });
 
 gulp.task('scripts-build', () => {
   gulp.src(['app/scripts/src/**/*.js'])
