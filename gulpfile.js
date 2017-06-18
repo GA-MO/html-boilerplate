@@ -70,7 +70,7 @@ gulp.task('images-build', () => {
       imagemin.gifsicle({ interlaced: true }),
       imagemin.jpegtran({ progressive: true }),
       imagemin.optipng({ optimizationLevel: 5 }),
-      imagemin.svgo({ plugins: [{ removeViewBox: true }] })
+      // imagemin.svgo({ plugins: [{ removeViewBox: true }] })
     ]))
     .pipe(gulp.dest('' + output + '/images'));
 });
@@ -80,23 +80,36 @@ gulp.task('images-build', () => {
  */
 
 gulp.task('scripts', () => {
-  gulp.src(['app/scripts/src/**/*.js'])
+  gulp.src(['app/scripts/output/vendors.js', 'app/scripts/output/src.js'])
     .pipe(plumber())
-    .pipe(babel({
-      presets: ['es2015']
-    }))
     .pipe(concat(scriptOutputName))
     .on('error', gutil.log) // catch errors
     .pipe(gulp.dest('app/scripts'))
     .pipe(browserSync.reload({ stream: true }));
 });
 
-gulp.task('scripts-build', () => {
+gulp.task('src-scripts', () => {
   gulp.src(['app/scripts/src/**/*.js'])
     .pipe(plumber())
     .pipe(babel({
       presets: ['es2015']
     }))
+    .pipe(concat('src.js'))
+    .on('error', gutil.log) // catch errors
+    .pipe(gulp.dest('app/scripts/output'));
+});
+
+gulp.task('vendor-scripts', () => {
+  gulp.src(['app/scripts/vendors/**/*.js'])
+    .pipe(plumber())
+    .pipe(concat('vendors.js'))
+    .on('error', gutil.log) // catch errors
+    .pipe(gulp.dest('app/scripts/output'));
+})
+
+gulp.task('scripts-build', () => {
+  gulp.src(['app/scripts/' + scriptOutputName + ''])
+    .pipe(plumber())
     .pipe(concat(scriptOutputName))
     .pipe(uglify()) // compress
     .pipe(gulp.dest('' + output + '/scripts'));
@@ -206,7 +219,9 @@ gulp.task('createFolder', () => {
  */
 
 gulp.task('default', ['browserSync', 'scripts', 'styles'], () => {
-  gulp.watch('app/scripts/src/**', ['scripts']);
+  gulp.watch('app/scripts/src/**/*.js', ['src-scripts']);
+  gulp.watch('app/scripts/vendors/*.js', ['vendor-scripts']);
+  gulp.watch('app/scripts/output/*.js', ['scripts']);
   gulp.watch('app/styles/scss/**', ['styles']);
   gulp.watch('app/*.html', ['html']);
   gulp.watch('app/*.php', ['php']);

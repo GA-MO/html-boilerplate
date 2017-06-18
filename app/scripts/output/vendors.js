@@ -749,6 +749,3 @@ else
     window.SmoothScroll = SmoothScroll;
 
 })();
-'use strict';
-
-console.log('Hello');
