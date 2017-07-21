@@ -7,7 +7,9 @@
 /// @example
 /// @include fluid-sizing('font-size', (576px: 22px, 768px: 24px, 992px: 34px));
 /// @author Jake Wilson <jake.e.wilson@gmail.com>
-@mixin fluid-sizing($property, $map) {
+
+@mixin fluid-sizing($property, $data-map) {
+  $map: map-gird($data-map);
   // Get the number of provided breakpoints
   $length: length(map-keys($map));
   
@@ -114,4 +116,23 @@
     }
   }
   @return $newList;
+}
+
+/// map-grid
+/// map data with grid-system
+/// @returns A SASS data-gird
+@function map-gird($data-map) {
+  $data-gird: ();
+  @each $width, $size in $data-map {
+    $width-grid: map-get($width-breakpoints, $width);
+    $width-map: $width;
+    @if $width-grid != null {
+      $width-map: $width-grid;
+    }
+    @if $width == D {
+      $width-map: 99999px;
+    }
+    $data-gird: map-merge($data-gird, ($width-map: $size));
+  }
+  @return $data-gird;
 }
