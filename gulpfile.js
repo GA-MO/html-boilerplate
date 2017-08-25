@@ -80,36 +80,23 @@ gulp.task('images-build', () => {
  */
 
 gulp.task('scripts', () => {
-  gulp.src(['app/scripts/output/vendors.js', 'app/scripts/output/src.js'])
+  gulp.src(['app/scripts/vendors/**/*.js', 'app/scripts/src/*.js'])
     .pipe(plumber())
+    .pipe(babel({
+      presets: ['es2015']
+    }))
     .pipe(concat(scriptOutputName))
     .on('error', gutil.log) // catch errors
     .pipe(gulp.dest('app/scripts'))
     .pipe(browserSync.reload({ stream: true }));
 });
 
-gulp.task('src-scripts', () => {
-  gulp.src(['app/scripts/src/**/*.js'])
+gulp.task('scripts-build', () => {
+  gulp.src(['app/scripts/vendors/**/*.js', 'app/scripts/src/*.js'])
     .pipe(plumber())
     .pipe(babel({
       presets: ['es2015']
     }))
-    .pipe(concat('src.js'))
-    .on('error', gutil.log) // catch errors
-    .pipe(gulp.dest('app/scripts/output'));
-});
-
-gulp.task('vendor-scripts', () => {
-  gulp.src(['app/scripts/vendors/**/*.js'])
-    .pipe(plumber())
-    .pipe(concat('vendors.js'))
-    .on('error', gutil.log) // catch errors
-    .pipe(gulp.dest('app/scripts/output'));
-})
-
-gulp.task('scripts-build', () => {
-  gulp.src(['app/scripts/' + scriptOutputName + ''])
-    .pipe(plumber())
     .pipe(concat(scriptOutputName))
     .pipe(uglify()) // compress
     .pipe(gulp.dest('' + output + '/scripts'));
@@ -162,14 +149,14 @@ gulp.task('styles-build', () => {
  */
 
 gulp.task('html', () => {
-  gulp.src('app/*.html')
+  gulp.src('app/**/*.html')
     .pipe(plumber())
     .pipe(browserSync.reload({ stream: true }))
     .on('error', gutil.log); // catch errors
 });
 
 gulp.task('php', () => {
-  gulp.src('app/*.php')
+  gulp.src('app/**/*.php')
     .pipe(plumber())
     .pipe(browserSync.reload({ stream: true }))
     .on('error', gutil.log); // catch errors
@@ -177,6 +164,14 @@ gulp.task('php', () => {
 
 gulp.task('html-build', () => {
   gulp.src('app/*')
+    .pipe(plumber())
+    .pipe(gulp.dest(output));
+
+  gulp.src('app/**/*.html')
+    .pipe(plumber())
+    .pipe(gulp.dest(output));
+
+  gulp.src('app/**/*.php')
     .pipe(plumber())
     .pipe(gulp.dest(output));
 
@@ -219,12 +214,11 @@ gulp.task('createFolder', () => {
  */
 
 gulp.task('default', ['browserSync', 'scripts', 'styles'], () => {
-  gulp.watch('app/scripts/src/**/*.js', ['src-scripts']);
-  gulp.watch('app/scripts/vendors/*.js', ['vendor-scripts']);
-  gulp.watch('app/scripts/output/*.js', ['scripts']);
+  gulp.watch('app/scripts/src/**/*.js', ['scripts']);
+  gulp.watch('app/scripts/vendors/*.js', ['scripts']);
   gulp.watch('app/styles/scss/**', ['styles']);
-  gulp.watch('app/*.html', ['html']);
-  gulp.watch('app/*.php', ['php']);
+  gulp.watch('app/**/*.html', ['html']);
+  gulp.watch('app/**/*.php', ['php']);
 });
 
 /**
