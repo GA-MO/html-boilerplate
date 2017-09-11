@@ -1,20 +1,5 @@
 'use strict'
 
-const output = 'dist'
-const proxy = false // Input your server path 'localhost/your-project/app'
-const scriptOutputName = 'main.js'
-const styleOutputName = 'styles.css'
-const masterSassFileName = 'styles.scss'
-const autoPrefixBrowserList = [
-  'last 2 version',
-  'safari 5',
-  'ie 8',
-  'ie 9',
-  'opera 12.1',
-  'ios 6',
-  'android 4'
-]
-
 /**
  * Load all of our dependencies
  */
@@ -35,13 +20,34 @@ const plumber = require('gulp-plumber')
 const critical = require('critical').stream
 
 /**
+ * Import configs
+ */
+
+const CONFIG = require('./package.json')
+const PATHS = CONFIG.paths
+const VARS = CONFIG.vars
+const PROXY = CONFIG.proxy
+
+/**
+ * Variables
+ */
+
+ const allHTML = PATHS.app.base + '/**/*.html'
+ const allPHP = PATHS.app.base + '/**/*.php'
+ const allVendorJS = PATHS.app.jsVendor + '/**/*.js'
+ const allSrcJS = PATHS.app.jsSrc + '/**/*.js'
+ const allFont = PATHS.app.font + '/**/*'
+ const allSCSS = PATHS.app.scss + '/**'
+ const allIMAGE = PATHS.app.img + '/**/*'
+
+/**
  * Task Browser Sync for reload browser
  */
 
 gulp.task('browserSync', () => {
-  if (proxy) {
+  if (PROXY.open) {
     browserSync({
-      proxy: proxy,
+      proxy: PROXY.path,
       options: {
         reloadDelay: 250
       },
@@ -50,7 +56,7 @@ gulp.task('browserSync', () => {
   } else {
     browserSync({
       server: {
-        baseDir: 'app/'
+        baseDir: PATHS.app.base
       },
       options: {
         reloadDelay: 250
@@ -66,7 +72,7 @@ gulp.task('browserSync', () => {
 
 gulp.task('images-build', () => {
   gulp
-    .src(['app/images/**/*'])
+    .src([allIMAGE])
     .pipe(plumber())
     .pipe(
       imagemin([
@@ -76,7 +82,7 @@ gulp.task('images-build', () => {
         // imagemin.svgo({ plugins: [{ removeViewBox: true }] })
       ])
     )
-    .pipe(gulp.dest('' + output + '/images'))
+    .pipe(gulp.dest(PATHS.output.img))
 })
 
 /**
@@ -85,79 +91,80 @@ gulp.task('images-build', () => {
 
 gulp.task('scripts', () => {
   gulp
-    .src(['app/scripts/vendors/**/*.js', 'app/scripts/src/*.js'])
+    .src([allVendorJS, allSrcJS])
     .pipe(plumber())
     .pipe(
       babel({
         presets: ['es2015']
       })
     )
-    .pipe(concat(scriptOutputName))
-    .on('error', gutil.log) // catch errors
-    .pipe(gulp.dest('app/scripts'))
+    .pipe(concat(VARS.bundleJS))
+    .on('error', gutil.log)
+    .pipe(gulp.dest(PATHS.app.js))
     .pipe(browserSync.reload({ stream: true }))
 })
 
 gulp.task('scripts-build', () => {
   gulp
-    .src(['app/scripts/vendors/**/*.js', 'app/scripts/src/*.js'])
+    .src([allVendorJS, allSrcJS])
     .pipe(plumber())
     .pipe(
       babel({
         presets: ['es2015']
       })
     )
-    .pipe(concat(scriptOutputName))
+    .pipe(concat(VARS.bundleJS))
     .pipe(uglify()) // compress
-    .pipe(gulp.dest('' + output + '/scripts'))
+    .pipe(gulp.dest(PATHS.output.js))
 })
 
 /**
  * Compiling our SCSS files
  */
 
-gulp.task('styles', () => {
+const scssSrc = PATHS.app.scss + '/' + VARS.scss
+gulp.task('style', () => {
   gulp
-    .src('app/styles/scss/' + masterSassFileName + '') // master SCSS file
+    .src(scssSrc) // master SCSS file
     .pipe(plumber())
     .pipe(
       sass({
         outputStyle: 'compressed',
         errLogToConsole: true,
-        includePaths: ['app/styles/scss']
+        includePaths: [PATHS.app.scss]
       }).on('error', sass.logError)
     )
     .pipe(
       autoprefixer({
-        browsers: autoPrefixBrowserList,
+        browsers: CONFIG.autoPrefixBrowserList,
         cascade: true
       })
     )
-    .on('error', gutil.log) // catch errors
-    .pipe(concat(styleOutputName))
-    .pipe(gulp.dest('app/styles'))
+    .on('error', gutil.log)
+    .pipe(concat(VARS.bundleCSS))
+    .pipe(gulp.dest(PATHS.app.css))
     .pipe(browserSync.reload({ stream: true }))
 })
 
-gulp.task('styles-build', () => {
+gulp.task('style-build', () => {
   gulp
-    .src('app/styles/scss/' + masterSassFileName + '') // master SCSS file
+    .src(scssSrc) // master SCSS file
     .pipe(plumber())
     .pipe(
       sass({
         outputStyle: 'compressed',
-        includePaths: ['app/styles/scss']
+        includePaths: [PATHS.app.scss],
       }).on('error', sass.logError)
     )
     .pipe(
       autoprefixer({
-        browsers: autoPrefixBrowserList,
+        browsers: CONFIG.autoPrefixBrowserList,
         cascade: true
       })
     )
-    .pipe(concat(styleOutputName))
+    .pipe(concat(VARS.bundleCSS))
     .pipe(minifyCSS())
-    .pipe(gulp.dest('' + output + '/styles'))
+    .pipe(gulp.dest(PATHS.output.css))
 })
 
 
@@ -167,10 +174,10 @@ gulp.task('styles-build', () => {
 
 gulp.task('critical-css', () => {
   gulp
-    .src('app/**/*.html')
+    .src(allHTML)
     .pipe(
       critical({
-        base: 'app/',
+        base: PATHS.app.base,
         inline: true,
         minify: true,
         width: 1900,
@@ -180,7 +187,7 @@ gulp.task('critical-css', () => {
     .on('error', function(err) {
       gutil.log(gutil.colors.red(err.message))
     })
-    .pipe(gulp.dest(output))
+    .pipe(gulp.dest(PATHS.output.base))
 })
 
 /**
@@ -189,45 +196,45 @@ gulp.task('critical-css', () => {
 
 gulp.task('html', () => {
   gulp
-    .src('app/**/*.html')
+    .src(allHTML)
     .pipe(plumber())
     .pipe(browserSync.reload({ stream: true }))
-    .on('error', gutil.log) // catch errors
+    .on('error', gutil.log)
 })
 
 gulp.task('php', () => {
   gulp
-    .src('app/**/*.php')
+    .src(allPHP)
     .pipe(plumber())
     .pipe(browserSync.reload({ stream: true }))
-    .on('error', gutil.log) // catch errors
+    .on('error', gutil.log)
 })
 
-gulp.task('html-build', () => {
+gulp.task('copy', () => {
   gulp
-    .src('app/*')
+    .src(PATHS.app.base + '/*')
     .pipe(plumber())
-    .pipe(gulp.dest(output))
+    .pipe(gulp.dest(PATHS.output.base))
 
   gulp
-    .src('app/**/*.html')
+    .src(allHTML)
     .pipe(plumber())
-    .pipe(gulp.dest(output))
+    .pipe(gulp.dest(PATHS.output.base))
 
   gulp
-    .src('app/**/*.php')
+    .src(allPHP)
     .pipe(plumber())
-    .pipe(gulp.dest(output))
+    .pipe(gulp.dest(PATHS.output.base))
 
   gulp
-    .src('app/.*')
+    .src(PATHS.app.base + '/.*')
     .pipe(plumber())
-    .pipe(gulp.dest(output))
+    .pipe(gulp.dest(PATHS.output.base))
 
   gulp
-    .src('app/fonts/**/*')
+    .src(allFont)
     .pipe(plumber())
-    .pipe(gulp.dest('' + output + '/fonts'))
+    .pipe(gulp.dest(PATHS.output.font))
 })
 
 /**
@@ -235,23 +242,23 @@ gulp.task('html-build', () => {
  */
 
 gulp.task('clean', function() {
-  gulp.src(output).pipe(clean({ force: true }))
+  gulp.src(PATHS.output.base).pipe(clean({ force: true }))
 })
 
 /**
  * Startup the web server
  */
 
-gulp.task('default', ['browserSync', 'scripts', 'styles'], () => {
-  gulp.watch('app/scripts/src/**/*.js', ['scripts'])
-  gulp.watch('app/scripts/vendors/*.js', ['scripts'])
-  gulp.watch('app/styles/scss/**', ['styles'])
-  gulp.watch('app/**/*.html', ['html'])
-  gulp.watch('app/**/*.php', ['php'])
+gulp.task('default', ['browserSync', 'scripts', 'style'], () => {
+  gulp.watch(allSrcJS, ['scripts'])
+  gulp.watch(allVendorJS, ['scripts'])
+  gulp.watch(allSCSS, ['style'])
+  gulp.watch(allHTML, ['html'])
+  gulp.watch(allPHP, ['php'])
 })
 
 /**
  * Build project
  */
 
-gulp.task('build', gulpSequence('scripts-build', 'styles-build', 'images-build', 'html-build', 'critical-css'))
+gulp.task('build', gulpSequence('scripts-build', 'style-build', 'images-build', 'copy', 'critical-css'))
