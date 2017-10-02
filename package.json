@@ -26,21 +26,21 @@
   ],
   "paths": {
     "app": {
-      "base": "./app",
-      "img": "./app/images",
-      "font": "./app/fonts",
-      "js": "./app/script",
-      "jsSrc": "./app/script/src",
-      "jsVendor": "./app/script/vendors",
-      "scss": "./app/style/scss",
-      "css": "./app/style"
+      "base": "app",
+      "img": "app/images",
+      "font": "app/fonts",
+      "js": "app/script",
+      "jsSrc": "app/script/src",
+      "jsVendor": "app/script/vendors",
+      "scss": "app/style/scss",
+      "css": "app/style"
     },
     "output": {
-      "base": "./dist",
-      "img": "./dist/images",
-      "font": "./dist/fonts",
-      "js": "./dist/script",
-      "css": "./dist/style"
+      "base": "dist",
+      "img": "dist/images",
+      "font": "dist/fonts",
+      "js": "dist/script",
+      "css": "dist/style"
     }
   },
   "dependencies": {},
