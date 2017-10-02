@@ -37,7 +37,7 @@ const PROXY = CONFIG.proxy
  const allVendorJS = PATHS.app.jsVendor + '/**/*.js'
  const allSrcJS = PATHS.app.jsSrc + '/**/*.js'
  const allFont = PATHS.app.font + '/**/*'
- const allSCSS = PATHS.app.scss + '/**'
+ const allSCSS = PATHS.app.scss + '/**/*'
  const allIMAGE = PATHS.app.img + '/**/*'
 
 /**
