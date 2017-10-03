@@ -4,5 +4,5 @@ node_modules
 yarn-error.log
 yarn.lock
 dist
-app/styles/styles.css
-app/scripts/main.js
+app/style/styles.css
+app/script/main.js
