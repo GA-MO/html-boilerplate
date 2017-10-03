@@ -11,6 +11,7 @@
     "path": "localhost/[your-project]/app"
   },
   "vars": {
+    "tempJS": "z.js",
     "bundleJS": "main.js",
     "bundleCSS": "style.css",
     "scss": "style.scss"
