@@ -4,26 +4,25 @@
  * Load all of our dependencies
  */
 
-const gulp = require('gulp')
-const babel = require('gulp-babel')
-const gutil = require('gulp-util')
-const concat = require('gulp-concat')
-const uglify = require('gulp-uglify')
-const sass = require('gulp-sass')
-const imagemin = require('gulp-imagemin')
-const minifyCSS = require('gulp-clean-css')
-const browserSync = require('browser-sync')
-const autoprefixer = require('gulp-autoprefixer')
-const gulpSequence = require('gulp-sequence')
-const clean = require('gulp-clean')
-const plumber = require('gulp-plumber')
-const critical = require('critical').stream
+import gulp from 'gulp'
+import babel from 'gulp-babel'
+import gutil from 'gulp-util'
+import concat from 'gulp-concat'
+import minifyJS from 'gulp-jsmin'
+import sass from 'gulp-sass'
+import imagemin from 'gulp-imagemin'
+import minifyCSS from 'gulp-clean-css'
+import browserSync from 'browser-sync'
+import autoprefixer from 'gulp-autoprefixer'
+import gulpSequence from 'gulp-sequence'
+import clean from 'gulp-clean'
+import plumber from 'gulp-plumber'
+import critical from 'critical'
 
 /**
  * Import configs
  */
-
-const CONFIG = require('./package.json')
+import CONFIG from './package.json'
 const PATHS = CONFIG.paths
 const VARS = CONFIG.vars
 const PROXY = CONFIG.proxy
@@ -32,13 +31,13 @@ const PROXY = CONFIG.proxy
  * Variables
  */
 
- const allHTML = PATHS.app.base + '/**/*.html'
- const allPHP = PATHS.app.base + '/**/*.php'
- const allVendorJS = PATHS.app.jsVendor + '/**/*.js'
- const allSrcJS = PATHS.app.jsSrc + '/**/*.js'
- const allFont = PATHS.app.font + '/**/*'
- const allSCSS = PATHS.app.scss + '/**/*'
- const allIMAGE = PATHS.app.img + '/**/*'
+ const allHTML = `${PATHS.app.base}/**/*.html`
+ const allPHP = `${PATHS.app.base}/**/*.php`
+ const allVendorJS = `${PATHS.app.jsVendor}/**/*.js`
+ const allSrcJS = `${PATHS.app.jsSrc}/**/*.js`
+ const allFont = `${PATHS.app.font}/**/*`
+ const allSCSS = `${PATHS.app.scss}/**/*`
+ const allIMAGE = `${PATHS.app.img}/**/*`
 
 /**
  * Task Browser Sync for reload browser
@@ -78,8 +77,8 @@ gulp.task('images-build', () => {
       imagemin([
         imagemin.gifsicle({ interlaced: true }),
         imagemin.jpegtran({ progressive: true }),
-        imagemin.optipng({ optimizationLevel: 5 })
-        // imagemin.svgo({ plugins: [{ removeViewBox: true }] })
+        imagemin.optipng({ optimizationLevel: 5 }),
+        imagemin.svgo({ plugins: [{ removeViewBox: false }] })
       ])
     )
     .pipe(gulp.dest(PATHS.output.img))
@@ -116,7 +115,7 @@ gulp.task('scripts-build', () => {
       })
     )
     .pipe(concat(VARS.bundleJS))
-    .pipe(uglify()) // compress
+    .pipe(minifyJS()) // compress
     .on('error', gutil.log)
     .pipe(gulp.dest(PATHS.output.js))
 })
@@ -125,7 +124,7 @@ gulp.task('scripts-build', () => {
  * Compiling our SCSS files
  */
 
-const scssSrc = PATHS.app.scss + '/' + VARS.scss
+const scssSrc = `${PATHS.app.scss}/${VARS.scss}`
 gulp.task('style', () => {
   gulp
     .src(scssSrc) // master SCSS file
@@ -179,7 +178,7 @@ gulp.task('critical-css', () => {
   gulp
     .src(allHTML)
     .pipe(
-      critical({
+      critical.stream({
         base: PATHS.app.base,
         inline: true,
         minify: true,
@@ -215,7 +214,7 @@ gulp.task('php', () => {
 
 gulp.task('copy', () => {
   gulp
-    .src(PATHS.app.base + '/*')
+    .src(`${PATHS.app.base}/*`)
     .pipe(plumber())
     .pipe(gulp.dest(PATHS.output.base))
 
@@ -230,7 +229,7 @@ gulp.task('copy', () => {
     .pipe(gulp.dest(PATHS.output.base))
 
   gulp
-    .src(PATHS.app.base + '/.*')
+    .src(`${PATHS.app.base}/.*`)
     .pipe(plumber())
     .pipe(gulp.dest(PATHS.output.base))
 

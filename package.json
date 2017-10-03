@@ -56,6 +56,7 @@
     "gulp-clean-css": "^3.4.0",
     "gulp-concat": "^2.6.0",
     "gulp-imagemin": "^3.3.0",
+    "gulp-jsmin": "^0.1.5",
     "gulp-plumber": "^1.0.1",
     "gulp-sass": "^3.1.0",
     "gulp-sequence": "^0.4.1",
