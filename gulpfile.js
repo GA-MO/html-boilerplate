@@ -95,7 +95,8 @@ gulp.task('scripts', () => {
     .pipe(plumber())
     .pipe(
       babel({
-        presets: ['es2015']
+        presets: ['es2015'],
+        only: /src/
       })
     )
     .pipe(concat(VARS.bundleJS))
@@ -110,7 +111,8 @@ gulp.task('scripts-build', () => {
     .pipe(plumber())
     .pipe(
       babel({
-        presets: ['es2015']
+        presets: ['es2015'],
+        only: /src/
       })
     )
     .pipe(concat(VARS.bundleJS))
