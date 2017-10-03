@@ -89,15 +89,24 @@ gulp.task('images-build', () => {
  * Compiling scripts
  */
 
+gulp.task('scripts-babel', () => {
+ gulp
+   .src([allSrcJS])
+   .pipe(plumber())
+   .pipe(
+     babel({
+       presets: ['es2015']
+     })
+   )
+   .pipe(concat(VARS.tempJS))
+   .on('error', gutil.log)
+   .pipe(gulp.dest(PATHS.app.jsVendor))
+})
+
 gulp.task('scripts', () => {
   gulp
-    .src([allVendorJS, allSrcJS])
+    .src([allVendorJS])
     .pipe(plumber())
-    .pipe(
-      babel({
-        presets: ['es2015']
-      })
-    )
     .pipe(concat(VARS.bundleJS))
     .on('error', gutil.log)
     .pipe(gulp.dest(PATHS.app.js))
@@ -106,15 +115,10 @@ gulp.task('scripts', () => {
 
 gulp.task('scripts-build', () => {
   gulp
-    .src([allVendorJS, allSrcJS])
+    .src([allVendorJS])
     .pipe(plumber())
-    .pipe(
-      babel({
-        presets: ['es2015']
-      })
-    )
     .pipe(concat(VARS.bundleJS))
-    .pipe(uglify()) // compress
+    // .pipe(uglify()) // compress
     .pipe(gulp.dest(PATHS.output.js))
 })
 
@@ -249,7 +253,7 @@ gulp.task('clean', function() {
  * Startup the web server
  */
 
-gulp.task('default', ['browserSync', 'scripts', 'style'], () => {
+gulp.task('default', ['browserSync', 'scripts-babel', 'scripts', 'style'], () => {
   gulp.watch(allSrcJS, ['scripts'])
   gulp.watch(allVendorJS, ['scripts'])
   gulp.watch(allSCSS, ['style'])
@@ -261,4 +265,4 @@ gulp.task('default', ['browserSync', 'scripts', 'style'], () => {
  * Build project
  */
 
-gulp.task('build', gulpSequence('scripts-build', 'style-build', 'images-build', 'copy', 'critical-css'))
+gulp.task('build', gulpSequence('scripts-babel', 'scripts-build', 'style-build', 'images-build', 'copy', 'critical-css'))
