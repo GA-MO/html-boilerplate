@@ -117,6 +117,7 @@ gulp.task('scripts-build', () => {
     )
     .pipe(concat(VARS.bundleJS))
     .pipe(uglify()) // compress
+    .on('error', gutil.log)
     .pipe(gulp.dest(PATHS.output.js))
 })
 
