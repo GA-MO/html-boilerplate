@@ -15,15 +15,6 @@
     "bundleCSS": "style.css",
     "scss": "style.scss"
   },
-  "autoPrefixBrowserList": [
-    "last 2 version",
-    "safari 5",
-    "ie 8",
-    "ie 9",
-    "opera 12.1",
-    "ios 6",
-    "android 4"
-  ],
   "paths": {
     "app": {
       "base": "app",
@@ -46,23 +37,28 @@
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.3.15",
+    "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.18.0",
     "browser-sync": "^2.9.10",
     "critical": "^0.9.1",
+    "eslint": "^4.7.2",
+    "eslint-config-standard": "^10.2.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^4.0.0",
-    "gulp-babel": "^6.1.2",
     "gulp-clean": "^0.3.2",
     "gulp-clean-css": "^3.4.0",
     "gulp-concat": "^2.6.0",
     "gulp-imagemin": "^3.3.0",
-    "gulp-jsmin": "^0.1.5",
     "gulp-plumber": "^1.0.1",
     "gulp-sass": "^3.1.0",
-    "gulp-sequence": "^0.4.1",
     "gulp-shell": "^0.6.3",
     "gulp-sourcemaps": "^2.6.0",
-    "gulp-uglify": "^3.0.0",
-    "gulp-util": "^3.0.6"
+    "gulp-util": "^3.0.6",
+    "webpack": "^3.6.0",
+    "webpack-stream": "^4.0.0"
   }
 }
