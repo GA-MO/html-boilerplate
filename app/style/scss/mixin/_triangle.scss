@@ -3,6 +3,7 @@
   $height: nth($size, length($size));
   $foreground-color: nth($color, 1);
   $background-color: if(length($color) == 2, nth($color, 2), transparent);
+
   height: 0;
   width: 0;
 
@@ -31,7 +32,7 @@
     border-top: $height solid $foreground-color;
 
     @if $direction == up-right {
-      border-left:  $width solid $background-color;
+      border-left: $width solid $background-color;
     } @else if $direction == up-left {
       border-right: $width solid $background-color;
     }
@@ -39,7 +40,7 @@
     border-bottom: $height solid $foreground-color;
 
     @if $direction == down-right {
-      border-left:  $width solid $background-color;
+      border-left: $width solid $background-color;
     } @else if $direction == down-left {
       border-right: $width solid $background-color;
     }

@@ -14,6 +14,7 @@
   font-size: 14px;
   @include transition(0.3s);
 }
+
 .button {
   @extend .button-style;
 }
