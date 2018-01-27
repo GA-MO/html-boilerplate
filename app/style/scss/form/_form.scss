@@ -1,4 +1,4 @@
-$all-text-input:'
+$all-text-input: '
 input[type="color"],
 input[type="date"],
 input[type="datetime"],
@@ -14,7 +14,7 @@ input[type="time"],
 input[type="url"],
 input[type="week"],
 textarea';
-$all-text-input-hover:'
+$all-text-input-hover: '
 input[type="color"]:hover,
 input[type="date"]:hover,
 input[type="datetime"]:hover,
@@ -30,7 +30,7 @@ input[type="time"]:hover,
 input[type="url"]:hover,
 input[type="week"]:hover,
 textarea:hover';
-$all-text-input-focus:'
+$all-text-input-focus: '
 input[type="color"]:focus,
 input[type="date"]:focus,
 input[type="datetime"]:focus,
@@ -46,7 +46,7 @@ input[type="time"]:focus,
 input[type="url"]:focus,
 input[type="week"]:focus,
 textarea:focus';
-$all-text-input-active:'
+$all-text-input-active: '
 input[type="color"]:active,
 input[type="date"]:active,
 input[type="datetime"]:active,
@@ -63,17 +63,15 @@ input[type="url"]:active,
 input[type="week"]:active,
 textarea:active';
 
-#{$all-text-input} {
+// #{$all-text-input} {
+// }
 
-}
+// #{$all-text-input-focus},
+// #{$all-text-input-hover} {
+// }
 
-#{$all-text-input-focus}, #{$all-text-input-hover} {
-
-}
-
-#{$all-text-input-active} {
-
-}
+// #{$all-text-input-active} {
+// }
 
 @import 'checkbox';
 @import 'radio';

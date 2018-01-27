@@ -11,8 +11,9 @@ export default () => {
         base: appPath.base,
         inline: true,
         minify: true,
-        width: 1900,
-        height: 1200
+        width: 1400,
+        height: 900,
+        timeout: 30000
       })
     )
     .on('error', function(err) {
