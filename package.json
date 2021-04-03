@@ -6,6 +6,9 @@
     "dev": "gulp",
     "build": "gulp clean && gulp build"
   },
+  "resolutions": {
+    "graceful-fs": "^4.2.4"
+  },
   "proxy": {
     "open": false,
     "path": "localhost/[your-project]/app"
