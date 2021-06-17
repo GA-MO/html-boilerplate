@@ -1,4 +1,11 @@
 
+# Responsive Design Made Easy 
+
+https://www.youtube.com/watch?v=bn-DQCifeQQ&t=390s
+Teacher: Kevin Powell
+
+
+
 # Front End Boilerplate
 Front-end boilerplate for creating new web projects with Gulp.js and everything you need to get started.
 
